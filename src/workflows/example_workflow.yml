@@ -2,7 +2,10 @@ name: "example_workflow"
 steps:
   - taskType: "polygonArea"
     stepNumber: 1
-  - taskType: "analysis"
+  - taskType: "dataAnalysis"
     stepNumber: 2
   - taskType: "notification"
     stepNumber: 3
+  - taskType: "report"
+    stepNumber: 4
+  
