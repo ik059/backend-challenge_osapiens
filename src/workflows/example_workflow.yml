@@ -4,8 +4,11 @@ steps:
     stepNumber: 1
   - taskType: "dataAnalysis"
     stepNumber: 2
+    dependsOn: "polygonArea"
   - taskType: "notification"
     stepNumber: 3
+    dependsOn: "dataAnalysis"
   - taskType: "report"
     stepNumber: 4
+    dependsOn: "notification"
   
