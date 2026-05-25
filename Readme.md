@@ -305,7 +305,7 @@ npm test
 
 #### 1. Create a Workflow
 - **URL:** `POST /analysis`
-- **Resuest Body**
+- **Request Body**
 ```json
 {
   "clientId": "client123",
