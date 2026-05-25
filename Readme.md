@@ -291,5 +291,146 @@ Implement an API endpoint to retrieve the final results of a completed workflow.
    - Update the README file to include instructions for testing the new features.
    - Document the API endpoints with request and response examples.
 
+### Running the test cases
+```
+npm test
+```
+
+### Test cases
+- `PolygonAreaJob` - calculate the polygon area from GeoJSON
+- `ReportGenerationJob` - prepare all task outputs into a report
+- Workflow API endpoints - status and results
+
+### API Documentation
+
+#### 1. Create a Workflow
+- **URL:** `POST /analysis`
+- **Resuest Body**
+```json
+{
+  "clientId": "client123",
+  "geoJson": {
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -63.624885020050996,
+            -10.311050368263523
+          ],
+          [
+            -63.624885020050996,
+            -10.367865108370523
+          ],
+          [
+            -63.61278302732815,
+            -10.367865108370523
+          ],
+          [
+            -63.61278302732815,
+            -10.311050368263523
+          ],
+          [
+            -63.624885020050996,
+            -10.311050368263523
+          ]
+        ]
+      ]
+    }
+  }
+}
+```
+- **Response**
+```json
+{
+    "workflowId":"035e8c8a-12b7-4aa4-9eb6-ee92edf342e6",
+    "message": "Workflow created and tasks queued from YAML definition."
+}
+```
+- **Errors**
+    - `500` - Failed to create workflow
+#### 2. Get Workflow Status
+- **URL:** `GET /workflow/:id/status`
+- **Response:**
+```json
+{
+    "workflowId":"035e8c8a-12b7-4aa4-9eb6-ee92edf342e6",
+    "status":"completed",
+    "completedTasks":4,
+    "totalTasks":4
+}
+```
+- **Errors:**
+  - `404` — Workflow not found
+
+#### 3. Get Workflow Results
+- **URL:** `GET /workflow/:id/results`
+- **Response:**
+```json
+{
+  "workflowId": "035e8c8a-12b7-4aa4-9eb6-ee92edf342e6",
+  "status": "completed",
+  "finalResult": {
+    "tasks": [
+      {
+        "taskID": "11ddb2ed-5286-4194-b5cb-aa4f8c1cfe31",
+        "type": "polygonArea",
+        "output": {
+          "area": 8363324.273315565,
+          "unit": "square meters"
+        },
+        "status": "completed"
+      },
+      {
+        "taskID": "40d33866-9b4e-4335-be0b-297d02360be1",
+        "type": "dataAnalysis",
+        "output": "Brazil",
+        "status": "completed"
+      },
+      {
+        "taskID": "a1a74751-18d2-40a4-9498-c8c0bf6d75e9",
+        "type": "notification",
+        "output": {},
+        "status": "completed"
+      },
+      {
+        "taskID": "6991c560-a80d-4c20-ba44-a0df220aa5d7",
+        "type": "report",
+        "output": {
+          "workflowId": "035e8c8a-12b7-4aa4-9eb6-ee92edf342e6",
+          "tasks": [
+            {
+              "taskId": "11ddb2ed-5286-4194-b5cb-aa4f8c1cfe31",
+              "type": "polygonArea",
+              "output": {
+                "area": 8363324.273315565,
+                "unit": "square meters"
+              }
+            },
+            {
+              "taskId": "40d33866-9b4e-4335-be0b-297d02360be1",
+              "type": "dataAnalysis",
+              "output": "Brazil"
+            },
+            {
+              "taskId": "a1a74751-18d2-40a4-9498-c8c0bf6d75e9",
+              "type": "notification",
+              "output": {}
+            }
+          ],
+          "finalReport": "Aggregated data and results"
+        },
+        "status": "completed"
+      }
+    ]
+  }
+}
+```
+- **Errors:**
+  - `404` — Workflow not found
+  - `400` — Workflow is not yet completed
+
+
 ---
 
