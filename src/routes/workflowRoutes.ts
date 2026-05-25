@@ -54,11 +54,11 @@ router.get('/:id/results', async (req, res): Promise<void> =>{
         })
 
         if(!existWorkflow){
-            res.status(404).json({message: "Workflow not found"})
+            res.status(404).json({message: "workflow ID does not exist"})
             return
         }
         else if(existWorkflow.status !== WorkflowStatus.Completed){
-            res.status(400).json({message:"Workflow is not completed yet"})
+            res.status(400).json({message:"Workflow is not yet completed"})
             return
         }
         else{
