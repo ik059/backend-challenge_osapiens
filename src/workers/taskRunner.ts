@@ -64,6 +64,14 @@ export class TaskRunner {
                 currentWorkflow.status = WorkflowStatus.Failed;
             } else if (allCompleted) {
                 currentWorkflow.status = WorkflowStatus.Completed;
+                currentWorkflow.finalResult = JSON.stringify({
+                    tasks: currentWorkflow.tasks.map(t=>({
+                        taskID: t.taskId,
+                        type: t.taskType,
+                        output: t.output ? JSON.parse(t.output) : null,
+                        status: t.status
+                    }))
+                })
             } else {
                 currentWorkflow.status = WorkflowStatus.InProgress;
             }
