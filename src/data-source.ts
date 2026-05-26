@@ -6,7 +6,7 @@ import {Workflow} from "./models/Workflow";
 export const AppDataSource = new DataSource({
     type: 'sqlite',
     database: 'data/database.sqlite',
-    dropSchema: true, //need to update when ready for production
+    dropSchema: true, // Note: set to false in production
     entities: [Task, Result, Workflow],
     synchronize: true,
     logging: false,

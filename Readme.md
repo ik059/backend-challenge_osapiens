@@ -72,8 +72,8 @@ src
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/backend-coding-challenge.git
-   cd backend-coding-challenge
+   git clone https://github.com/ik059/backend-challenge_osapiens
+   cd backend-challenge_osapiens
    ```
 
 2. **Install dependencies:**
