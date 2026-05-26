@@ -72,7 +72,7 @@ src
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/ik059/backend-challenge_osapiens
+   git clone https://github.com/ik059/backend-challenge_osapiens.git
    cd backend-challenge_osapiens
    ```
 
